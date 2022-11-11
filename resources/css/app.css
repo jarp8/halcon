@@ -1,0 +1,11 @@
+/* FontAwesome */
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+
+.add-btn{
+    font-size: 28px;
+}
+
+.testing-git{
+    background-color: rebeccapurple;
+}
