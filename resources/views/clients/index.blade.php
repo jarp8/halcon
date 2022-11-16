@@ -27,15 +27,18 @@
       </tr>
     </thead>
     <tbody>
+    @if($clients !== null)
+      @foreach($clients as $client)
       <tr>
-
+        <td>{{$client->name}}</td>
+        <td>{{$client->rfc}}</td>
+        <td>
+          <a href=""><i class="fa-solid fa-pen-to-square m-3"></i></a>
+          <a href=""><i class="fa-solid fa-trash"></i></a>
+        </td>
       </tr>
-      <tr>
-
-      </tr>
-      <tr>
-
-      </tr>
+      @endforeach
+    @endif
     </tbody>
 </table>
 @endsection

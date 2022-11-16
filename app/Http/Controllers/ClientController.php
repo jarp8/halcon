@@ -16,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('clients.index');
+        $clients = Client::all();
+        return view('clients.index', compact('clients'));
+
     }
 
     /**
@@ -37,8 +39,14 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => "$request->rfc@hotmail.com",
+            'password' => "th123"
+        ]);
+        
         $attrs = array_merge($request->all(), [
-            'user_id' => 1,
+            'user_id' => $user->id,
 			'created_by' => auth()->id(),
 			'updated_by' => auth()->id(),
 			'created_at' => date("Y-m-d H:i:s"),
@@ -46,7 +54,7 @@ class ClientController extends Controller
         ]);
 
         try{
-            Client::create($attrs);
+            $client = Client::create($attrs);
             session()->flash('message', "Cliente creado correctamente");
         }catch(\Illuminate\Database\QueryException $ex){
             session()->flash('error', "Error inesperado al intentar agregar cliente");
