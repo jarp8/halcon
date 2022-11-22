@@ -33,8 +33,15 @@
         <td>{{$client->name}}</td>
         <td>{{$client->rfc}}</td>
         <td>
-          <a href=""><i class="fa-solid fa-pen-to-square m-3"></i></a>
-          <a href=""><i class="fa-solid fa-trash"></i></a>
+          {{-- Edit --}}
+          <a href="{{route('clients.edit', $client->id)}}"><i class="fa-solid fa-pen-to-square m-3"></i></a>
+
+          {{-- Delete --}}
+          <form action="{{route('clients.destroy', $client->id)}}" method="POST" class="edit-form">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <button type="submit"><i class="fa-solid fa-trash"></i></button>
+          </form>
         </td>
       </tr>
       @endforeach

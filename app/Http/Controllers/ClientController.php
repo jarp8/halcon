@@ -18,7 +18,6 @@ class ClientController extends Controller
     {
         $clients = Client::all();
         return view('clients.index', compact('clients'));
-
     }
 
     /**
@@ -82,7 +81,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -94,7 +95,20 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $client = Client::where('user_id', $request->user_id)->first();
+            $attrs = array_merge($request->all(), [
+                'updated_by' => auth()->id(),
+            ]);
+    
+            $client->update($attrs);
+
+            session()->flash('message', "Cliente modificado correctamente");
+        }catch(\Illuminate\Database\QueryException $ex){
+            session()->flash('error', "Error inesperado al intentar modificar cliente");
+        }
+
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -105,6 +119,14 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $client = Client::find($id);
+            $client->user->delete();
+            session()->flash('message', "Cliente eliminado correctamente");
+        }catch(\Illuminate\Database\QueryException $ex){
+            session()->flash('error', "Error inesperado al intentar eliminar cliente");
+        }
+
+        return redirect()->route('clients.index');
     }
 }

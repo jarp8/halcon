@@ -12,4 +12,7 @@ class Client extends Model
     protected $table = 'clients';
 	protected $fillable = ['name', 'rfc', 'user_id', 'notes', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
