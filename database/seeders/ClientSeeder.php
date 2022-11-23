@@ -16,6 +16,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
+        //Testing commit
         DB::table('clients')->insert([
             'name' => 'Usuario',
             'rfc' => 'XAX00X00X',
