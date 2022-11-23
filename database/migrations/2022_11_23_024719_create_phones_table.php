@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('phones', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('url');
+            $table->string('description');
 
-            //
-            $table->smallInteger('invoice_id')->unsigned();
-            $table->foreign('invoice_id')->references('id')->on('invoices');
-
-            //
-            $table->smallInteger('file_type_id')->unsigned();
-            $table->foreign('file_type_id')->references('id')->on('file_types');
+            $table->smallInteger('user_id')->unsigned()->comment('Llave foránea de users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             //Datos de creación y modificación
             $table->string('notes', 1024)->nullable()->comment('Notas');
@@ -44,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('phones');
     }
 };
