@@ -22,5 +22,11 @@ class ClientSeeder extends Seeder
             'rfc' => 'XAX00X00X',
             'user_id' => '1'
         ]);
+
+        DB::table('clients')->insert([
+            'name' => 'Retro',
+            'rfc' => 'XAX00X00XR',
+            'user_id' => '2'
+        ]);
     }
 }

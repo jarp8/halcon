@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardClientController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/', function () {
 
 Route::get('dashboard', [DashboardController::class, 'index']);
 
-Route::get('dashboard_client', [DashboardClientController::class, 'index']);
+Route::get('dashboard_client', [DashboardClientController::class, 'index'])->name('dashboard-client.index');
 
 Route::resource('clients', ClientController::class);
+
+Route::get('getinvoiceinfo', [InvoiceController::class, 'getInvoiceInfo'])->name('invoices.getinvoiceinfo');

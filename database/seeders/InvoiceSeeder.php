@@ -23,5 +23,13 @@ class InvoiceSeeder extends Seeder
             'client_id' => 1,
             'invoice_status_id' => 3
         ]);
+
+        DB::table('invoices')->insert([
+            'total' => 150,
+            'delivery_address' => 'San antonio 211 Lomas',
+            'date' => '2022-11-25',
+            'client_id' => 2,
+            'invoice_status_id' => 2
+        ]);
     }
 }

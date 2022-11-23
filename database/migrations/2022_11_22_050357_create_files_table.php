@@ -19,7 +19,7 @@ return new class extends Migration
 
             //
             $table->smallInteger('invoice_id')->unsigned();
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
 
             //
             $table->smallInteger('file_type_id')->unsigned();

@@ -7,7 +7,8 @@
             id="name" 
             name="name" 
             placeholder="Enter name"
-            value="{{$client->name ?? ''}}">
+            value="{{$client->name ?? ''}}"
+            required>
     </div>
     
     <div class="form-group">
@@ -18,7 +19,8 @@
             id="rfc"
             name="rfc"
             placeholder="Enter RFC"
-            value="{{$client->rfc ?? ''}}">
+            value="{{$client->rfc ?? ''}}"
+            required>
     </div>
 
     @if (isset($isEdit))

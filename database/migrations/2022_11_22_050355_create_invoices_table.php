@@ -21,7 +21,7 @@ return new class extends Migration
 
             //
             $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 
             //
             $table->smallInteger('invoice_status_id')->unsigned();

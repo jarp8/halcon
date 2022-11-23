@@ -38,6 +38,11 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'rfc' => 'required',
+        ]);
+
         $user = User::create([
             'name' => $request->name,
             'email' => "$request->rfc@hotmail.com",
@@ -54,9 +59,9 @@ class ClientController extends Controller
 
         try{
             $client = Client::create($attrs);
-            session()->flash('message', "Cliente creado correctamente");
+            session()->flash('message', "Client Successfully created");
         }catch(\Illuminate\Database\QueryException $ex){
-            session()->flash('error', "Error inesperado al intentar agregar cliente");
+            session()->flash('error', "Error");
         }
 
         return redirect()->route('clients.index');
@@ -95,6 +100,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'rfc' => 'required',
+        ]);
+
         try{
             $client = Client::where('user_id', $request->user_id)->first();
             $attrs = array_merge($request->all(), [
@@ -103,9 +113,9 @@ class ClientController extends Controller
     
             $client->update($attrs);
 
-            session()->flash('message', "Cliente modificado correctamente");
+            session()->flash('message', "Client Successfully modified");
         }catch(\Illuminate\Database\QueryException $ex){
-            session()->flash('error', "Error inesperado al intentar modificar cliente");
+            session()->flash('error', "Error");
         }
 
         return redirect()->route('clients.index');
@@ -122,9 +132,9 @@ class ClientController extends Controller
         try{
             $client = Client::find($id);
             $client->user->delete();
-            session()->flash('message', "Cliente eliminado correctamente");
+            session()->flash('message', "Client Successfully deleted");
         }catch(\Illuminate\Database\QueryException $ex){
-            session()->flash('error', "Error inesperado al intentar eliminar cliente");
+            session()->flash('error', "Error" . $ex);
         }
 
         return redirect()->route('clients.index');

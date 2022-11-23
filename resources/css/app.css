@@ -1,6 +1,15 @@
 /* FontAwesome */
 @import "@fortawesome/fontawesome-free/css/all.css";
 
+.dashboard-images img{
+    width: 100%;
+    height: auto;
+}
+
+.invoice-info span{
+    font-weight: 700;
+}
+
 .add-btn{
     font-size: 28px;
 }

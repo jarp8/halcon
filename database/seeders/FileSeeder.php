@@ -27,5 +27,11 @@ class FileSeeder extends Seeder
             'invoice_id' => 1,
             'file_type_id' => 2
         ]);
+
+        DB::table('files')->insert([
+            'url' => 'resources/images/onroute.jpg',
+            'invoice_id' => 2,
+            'file_type_id' => 1
+        ]);
     }
 }
