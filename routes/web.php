@@ -18,14 +18,14 @@ use App\Http\Controllers\InvoiceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('clients', ClientController::class);
 });
 
-Route::get('dashboard', [DashboardController::class, 'index']);
-
-Route::get('dashboard_client', [DashboardClientController::class, 'index'])->name('dashboard-client.index');
-
-Route::resource('clients', ClientController::class);
-
+Route::get('/', [DashboardClientController::class, 'index'])->name('dashboard-client.index');
 Route::get('getinvoiceinfo', [InvoiceController::class, 'getInvoiceInfo'])->name('invoices.getinvoiceinfo');
+
+// Route::get('dashboard', [DashboardController::class, 'index']);

@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <h1>Dashboard</h1>
     <form action="{{ route('invoices.getinvoiceinfo') }}">
         @csrf
@@ -18,11 +34,3 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
-
-@push('scripts')
-    <script>
-        $(function() {
-            console.log($('#user_id'));
-        });
-    </script>
-@endpush
